@@ -6,6 +6,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Project.ItemTableModel;
+import javax.swing.JComboBox;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -46,10 +47,31 @@ public class HomePage extends javax.swing.JFrame {
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-        } 
+        }
     }
+    
+    public void categoryData(JComboBox<String> categoryCombo){
+        try{
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("Select CategoryName from category");
+            
+            while(rs.next()){
+                categoryCombo.addItem(rs.getString("CategoryName"));
+            }
+        }
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, e);
+        }
+           
+            
+    }
+        
     public HomePage() {
         initComponents();
+        
+        categoryData(homeCategorySelector);
           
         showTable("SELECT items.ItemId, items.ItemName, category.CategoryName, items.Quantity, items.RetailPrice, items.WholesalePrice, items.DateCreated, items.DateModified, items.Status FROM items INNER JOIN category ON items.Category = category.CategoryId");
         
@@ -67,7 +89,7 @@ public class HomePage extends javax.swing.JFrame {
         logout_btn_ = new javax.swing.JButton();
         newItemBtn_ = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        categorySelector = new javax.swing.JComboBox<>();
+        homeCategorySelector = new javax.swing.JComboBox<>();
         categoryLabel = new javax.swing.JLabel();
         searchLabel = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
@@ -93,11 +115,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Duka Kuu Inventory System");
 
-        categorySelector.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        categorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        categorySelector.addActionListener(new java.awt.event.ActionListener() {
+        homeCategorySelector.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        homeCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        homeCategorySelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categorySelectorActionPerformed(evt);
+                homeCategorySelectorActionPerformed(evt);
             }
         });
 
@@ -148,7 +170,7 @@ public class HomePage extends javax.swing.JFrame {
                                 .addGap(309, 309, 309)
                                 .addComponent(categoryLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(categorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(138, 138, 138)
                                 .addComponent(searchLabel)
                                 .addGap(18, 18, 18)
@@ -169,7 +191,7 @@ public class HomePage extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(newItemBtn_)
-                            .addComponent(categorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoryLabel)
                             .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -194,9 +216,9 @@ public class HomePage extends javax.swing.JFrame {
         }
     }                                           
 
-    private void categorySelectorActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void homeCategorySelectorActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         // TODO add your handling code here:
-    }                                                
+    }                                                    
 
     private void homeCloseBtn_ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         int a = JOptionPane.showConfirmDialog(null, "Do you want to exit?" , "Select", JOptionPane.YES_NO_OPTION);
@@ -243,7 +265,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify                     
     private javax.swing.JLabel categoryLabel;
-    private javax.swing.JComboBox<String> categorySelector;
+    private javax.swing.JComboBox<String> homeCategorySelector;
     private javax.swing.JButton homeCloseBtn_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

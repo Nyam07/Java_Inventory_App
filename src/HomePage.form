@@ -39,7 +39,7 @@
                               <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
                               <Component id="categoryLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="categorySelector" min="-2" pref="152" max="-2" attributes="0"/>
+                              <Component id="homeCategorySelector" min="-2" pref="152" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="searchLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
                       <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="newItemBtn_" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="categorySelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="homeCategorySelector" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="categoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,22 +113,19 @@
         <Property name="text" type="java.lang.String" value="Duka Kuu Inventory System"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="categorySelector">
+    <Component class="javax.swing.JComboBox" name="homeCategorySelector">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="1">
+            <StringItem index="0" value="All"/>
           </StringArray>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categorySelectorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homeCategorySelectorActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
