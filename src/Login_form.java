@@ -135,7 +135,7 @@ public class Login_form extends javax.swing.JFrame {
         if (username_field.getText().equals("Admin") && password_field.getText().equals("root")){
             setVisible(false);
             
-            new HomePage().setVisible(true);
+            new HomePage2().setVisible(true);
             }
         else {
             JOptionPane.showMessageDialog(null, "Incorrect credentials!!");
