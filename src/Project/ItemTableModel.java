@@ -11,7 +11,7 @@ public class ItemTableModel extends DefaultTableModel {
 
     public ItemTableModel() {
         super(new Object[][] {}, new String[] {});
-        this.columnNames = new String[] {"ItemID", "ItemName", "Category", "Quantity", "RetailPrice", "WholesalePrice", "Date Created", "Date Modified"};
+        this.columnNames = new String[] {"ItemID", "ItemName", "Category", "Quantity", "RetailPrice", "WholesalePrice", "Date Created", "Date Modified", "Status"};
         setColumnIdentifiers(columnNames);
     }
 

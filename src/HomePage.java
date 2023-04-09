@@ -6,32 +6,35 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Project.ItemTableModel;
-import javax.swing.JComboBox;
+import Project.Helper;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 public class HomePage extends javax.swing.JFrame {
 
     /**
      * Creates new form HomePage
+     *
      * @param query
      */
-    
     //Method to show table details based on the query
-    public void showTable(String query){
-        
-       //display details in the table
+    public void showTable(String query) {
+
+        //display details in the table
         ItemTableModel dtm = new ItemTableModel();
         jTable1.setModel(dtm);
-        
-        try{
+
+        try {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
-            
+
             while (rs.next()) {
                 String itemId = rs.getString("ItemId");
                 String itemName = rs.getString("ItemName");
@@ -45,36 +48,20 @@ public class HomePage extends javax.swing.JFrame {
                 Object[] row = {itemId, itemName, category, quantity, retailPrice, wholesalePrice, dateCreated, dateModified, status};
                 dtm.addRow(row);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    public void categoryData(JComboBox<String> categoryCombo){
-        try{
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select CategoryName from category");
-            
-            while(rs.next()){
-                categoryCombo.addItem(rs.getString("CategoryName"));
-            }
-        }
-        catch(Exception e){
-            
-            JOptionPane.showMessageDialog(null, e);
-        }
-           
-            
-    }
-        
+
     public HomePage() {
         initComponents();
-        
-        categoryData(homeCategorySelector);
-          
+
+        Helper.categoryData(homeCategorySelector);
+
         showTable("SELECT items.ItemId, items.ItemName, category.CategoryName, items.Quantity, items.RetailPrice, items.WholesalePrice, items.DateCreated, items.DateModified, items.Status FROM items INNER JOIN category ON items.Category = category.CategoryId");
+
         
+
     }
 
     /**
@@ -110,13 +97,18 @@ public class HomePage extends javax.swing.JFrame {
 
         newItemBtn_.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         newItemBtn_.setText("Add New Item");
+        newItemBtn_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newItemBtn_ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Duka Kuu Inventory System");
 
         homeCategorySelector.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        homeCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        homeCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"All"}));
         homeCategorySelector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeCategorySelectorActionPerformed(evt);
@@ -132,15 +124,15 @@ public class HomePage extends javax.swing.JFrame {
         searchField.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object[][]{
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null}
+                },
+                new String[]{
+                    "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         jScrollPane1.setViewportView(jTable1);
 
@@ -155,78 +147,83 @@ public class HomePage extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newItemBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(311, 311, 311)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(309, 309, 309)
-                                .addComponent(categoryLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(138, 138, 138)
-                                .addComponent(searchLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(110, 110, 110)
-                        .addComponent(homeCloseBtn_)
-                        .addGap(53, 53, 53)
-                        .addComponent(logout_btn_)))
-                .addGap(43, 43, 43))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(newItemBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(311, 311, 311)
+                                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(309, 309, 309)
+                                                                .addComponent(categoryLabel)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(138, 138, 138)
+                                                                .addComponent(searchLabel)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(110, 110, 110)
+                                                .addComponent(homeCloseBtn_)
+                                                .addGap(53, 53, 53)
+                                                .addComponent(logout_btn_)))
+                                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(newItemBtn_)
-                            .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categoryLabel)
-                            .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(logout_btn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(homeCloseBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(newItemBtn_)
+                                                        .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(categoryLabel)
+                                                        .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(logout_btn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(homeCloseBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(46, 46, 46)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void logout_btn_ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-            int a = JOptionPane.showConfirmDialog(null, "Do you want to Logout?" , "Select", JOptionPane.YES_NO_OPTION);
-        
-        if(a==0){
+    private void logout_btn_ActionPerformed(java.awt.event.ActionEvent evt) {
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to Logout?", "Select", JOptionPane.YES_NO_OPTION);
+
+        if (a == 0) {
             setVisible(false);
             new Login_form().setVisible(true);
         }
-    }                                           
+    }
 
-    private void homeCategorySelectorActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void homeCategorySelectorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                                    
+    }
 
-    private void homeCloseBtn_ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        int a = JOptionPane.showConfirmDialog(null, "Do you want to exit?" , "Select", JOptionPane.YES_NO_OPTION);
-        
-        if(a==0){
+    private void homeCloseBtn_ActionPerformed(java.awt.event.ActionEvent evt) {
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Select", JOptionPane.YES_NO_OPTION);
+
+        if (a == 0) {
             System.exit(0);
         }
-    }                                             
+    }
+
+    private void newItemBtn_ActionPerformed(java.awt.event.ActionEvent evt) {
+        setVisible(false);
+        new HomePage().setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
