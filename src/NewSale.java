@@ -24,7 +24,7 @@ public class NewSale extends javax.swing.JFrame {
      * Creates new form NewSale
      */
     private HashMap<String, Object> itemTags;
-    
+
     public void clear() {
         itemsCombo.setSelectedIndex(0);
         quantityField.setText("");
@@ -266,7 +266,7 @@ public class NewSale extends javax.swing.JFrame {
         String strTotalCost = totalCostField.getText();
         if (strTotalCost.isEmpty() || strTotalCost.equals("0.0")) {
             JOptionPane.showMessageDialog(null, "Please calculate the total cost before saving!!");
-            
+
         } else {
             float totalCost = Float.parseFloat(strTotalCost);
             Object tag = itemTags.get(itemsCombo.getSelectedItem());
@@ -274,8 +274,10 @@ public class NewSale extends javax.swing.JFrame {
             int quantity = Integer.parseInt(quantityField.getText());
             String saleType = (String) saleTypeCombo.getSelectedItem();
             
+
             try {
             Connection con = ConnectionProvider.getCon();
+            con.setAutoCommit(false); // set autocommit to false
             PreparedStatement ps = con.prepareStatement("INSERT INTO sales (ItemID, Quantity, SaleType, TotalCost, SaleDate) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, itemId);
             ps.setInt(2, quantity);
@@ -283,14 +285,22 @@ public class NewSale extends javax.swing.JFrame {
             ps.setDouble(4, totalCost);
             ps.setDate(5, Date.valueOf(LocalDate.now()));
             ps.executeUpdate();
+            
+            // update items table with reduced quantity
+            PreparedStatement updateStmt = con.prepareStatement("UPDATE items SET Quantity = Quantity - ? WHERE ItemId = ?");
+            updateStmt.setInt(1, quantity);
+            updateStmt.setString(2, itemId);
+            updateStmt.executeUpdate();
+            
+            con.commit(); // commit the transaction
             JOptionPane.showMessageDialog(null, "Item added successfully!");
             clear();
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
 
-            JOptionPane.showMessageDialog(null, "Error: Failed to add item.");
-        }
+                JOptionPane.showMessageDialog(null, "Error: Failed to add item.");
+            }
 
         }
 

@@ -79,6 +79,7 @@ public class HomePage2 extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         searchBtn_ = new javax.swing.JButton();
         salesBtn_ = new javax.swing.JButton();
+        salesHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +158,9 @@ public class HomePage2 extends javax.swing.JFrame {
             }
         });
 
+        salesHistory.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        salesHistory.setText("Sales History");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,15 +178,17 @@ public class HomePage2 extends javax.swing.JFrame {
                         .addComponent(categoryLabel)
                         .addGap(31, 31, 31)
                         .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addGap(35, 35, 35)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(searchBtn_)
-                        .addGap(100, 100, 100)
+                        .addGap(36, 36, 36)
                         .addComponent(salesBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
+                        .addGap(41, 41, 41)
+                        .addComponent(salesHistory)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(homeCloseBtn_)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGap(42, 42, 42)
                         .addComponent(logout_btn_))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -203,7 +209,8 @@ public class HomePage2 extends javax.swing.JFrame {
                     .addComponent(homeCloseBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logout_btn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn_)
-                    .addComponent(salesBtn_))
+                    .addComponent(salesBtn_)
+                    .addComponent(salesHistory))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(152, Short.MAX_VALUE))
@@ -318,6 +325,7 @@ public class HomePage2 extends javax.swing.JFrame {
     private javax.swing.JButton logout_btn_;
     private javax.swing.JButton newItemBtn_;
     private javax.swing.JButton salesBtn_;
+    private javax.swing.JButton salesHistory;
     private javax.swing.JButton searchBtn_;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
