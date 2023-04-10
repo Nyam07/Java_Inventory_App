@@ -73,7 +73,6 @@ public class HomePage2 extends javax.swing.JFrame {
 
         newItemBtn_ = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        categoryLabel = new javax.swing.JLabel();
         homeCategorySelector = new javax.swing.JComboBox<>();
         searchField = new javax.swing.JTextField();
         homeCloseBtn_ = new javax.swing.JButton();
@@ -83,6 +82,7 @@ public class HomePage2 extends javax.swing.JFrame {
         searchBtn_ = new javax.swing.JButton();
         salesBtn_ = new javax.swing.JButton();
         salesHistory = new javax.swing.JButton();
+        editInventoryBtn_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,9 +97,6 @@ public class HomePage2 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Duka Kuu Inventory System");
-
-        categoryLabel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        categoryLabel.setText("Category");
 
         homeCategorySelector.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         homeCategorySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
@@ -169,6 +166,14 @@ public class HomePage2 extends javax.swing.JFrame {
             }
         });
 
+        editInventoryBtn_.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        editInventoryBtn_.setText("Edit Inventory");
+        editInventoryBtn_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editInventoryBtn_ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,11 +185,11 @@ public class HomePage2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(21, 21, 21)
                         .addComponent(newItemBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(categoryLabel)
-                        .addGap(31, 31, 31)
+                        .addGap(48, 48, 48)
+                        .addComponent(editInventoryBtn_)
+                        .addGap(51, 51, 51)
                         .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +199,7 @@ public class HomePage2 extends javax.swing.JFrame {
                         .addComponent(salesBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(salesHistory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(homeCloseBtn_)
                         .addGap(42, 42, 42)
                         .addComponent(logout_btn_))
@@ -211,14 +216,14 @@ public class HomePage2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newItemBtn_)
-                    .addComponent(categoryLabel)
                     .addComponent(homeCategorySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(homeCloseBtn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logout_btn_, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn_)
                     .addComponent(salesBtn_)
-                    .addComponent(salesHistory))
+                    .addComponent(salesHistory)
+                    .addComponent(editInventoryBtn_))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(152, Short.MAX_VALUE))
@@ -293,6 +298,11 @@ public class HomePage2 extends javax.swing.JFrame {
         new SalesHistory().setVisible(true);
     }//GEN-LAST:event_salesHistoryActionPerformed
 
+    private void editInventoryBtn_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editInventoryBtn_ActionPerformed
+        setVisible(false);
+        new EditInventory().setVisible(true);
+    }//GEN-LAST:event_editInventoryBtn_ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -329,7 +339,7 @@ public class HomePage2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel categoryLabel;
+    private javax.swing.JButton editInventoryBtn_;
     private javax.swing.JComboBox<String> homeCategorySelector;
     private javax.swing.JButton homeCloseBtn_;
     private javax.swing.JLabel jLabel1;
