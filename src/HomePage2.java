@@ -24,7 +24,8 @@ public class HomePage2 extends javax.swing.JFrame {
     public void showTable(String query) {
 
         //display details in the table
-        ItemTableModel dtm = new ItemTableModel();
+        String[] columnNames = {"ItemID", "ItemName", "Category", "Quantity", "RetailPrice", "WholesalePrice", "Date Created", "Date Modified"};
+        ItemTableModel dtm = new ItemTableModel(columnNames);
         jTable1.setModel(dtm);
 
         try {
@@ -160,6 +161,11 @@ public class HomePage2 extends javax.swing.JFrame {
 
         salesHistory.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         salesHistory.setText("Sales History");
+        salesHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesHistoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,19 +272,23 @@ public class HomePage2 extends javax.swing.JFrame {
 
     private void searchBtn_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn_ActionPerformed
         String search_item = searchField.getText();
-        
+
         String query = "SELECT items.ItemId, items.ItemName, category.CategoryName, items.Quantity, items.RetailPrice, items.WholesalePrice, items.DateCreated, items.DateModified, items.Status "
                 + "FROM items INNER JOIN category ON items.Category = category.CategoryId "
                 + "WHERE items.ItemName LIKE '%" + search_item + "%'";
-        
+
         showTable(query);
-        
+
     }//GEN-LAST:event_searchBtn_ActionPerformed
 
     private void salesBtn_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesBtn_ActionPerformed
         setVisible(false);
         new NewSale().setVisible(true);
     }//GEN-LAST:event_salesBtn_ActionPerformed
+
+    private void salesHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesHistoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesHistoryActionPerformed
 
     /**
      * @param args the command line arguments
